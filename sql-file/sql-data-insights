@@ -1,0 +1,73 @@
+SELECT * FROM uber_cleaned_data LIMIT 10; -- Shows the first 10 rows
+SELECT
+    COUNT(*) AS total_requests -- COUNT(*) counts all rows in the table. AS total_requests renames the result column to 'total_requests'.
+FROM
+    uber_cleaned_data; -- Specifies that the data comes from the 'uber_trips' table.
+    
+    
+    SELECT
+    Status,           -- Selects the 'Status' column to group by.
+    COUNT(*) AS count_of_requests -- Counts the number of requests for each status and renames the count column.
+FROM
+    uber_cleaned_data       -- Specifies the table to query.
+GROUP BY
+    Status            -- Groups the rows by unique values in the 'Status' column, so COUNT(*) applies to each group.
+ORDER BY
+    count_of_requests DESC; -- Orders the results in descending order based on the count of requests, showing the most frequent statuses first.
+
+SELECT
+    `Pickup point`,   -- Selects the 'Pickup point' column. Backticks are used because of the space in the column name.
+    COUNT(*) AS total_pickups -- Counts the number of requests for each pickup point and renames the count column.
+FROM
+    uber_cleaned_data        -- Specifies the table to query.
+GROUP BY
+    `Pickup point`    -- Groups the rows by unique values in the 'Pickup point' column.
+ORDER BY
+    total_pickups DESC; -- Orders the results in descending order by the total number of pickups, showing the most popular first.
+
+
+SELECT
+    HOUR,             -- Selects the 'HOUR' column.
+    COUNT(*) AS total_requests -- Counts the number of requests for each hour and renames the count column.
+FROM
+    uber_cleaned_data       -- Specifies the table to query.
+GROUP BY
+    HOUR              -- Groups the rows by unique values in the 'HOUR' column.
+ORDER BY
+    total_requests DESC; -- Orders the results in descending order by the total number of requests for each hour.
+   
+   
+   SELECT
+    Timeslot,         -- Selects the 'Timeslot' column.
+    COUNT(*) AS total_requests -- Counts the number of requests for each timeslot and renames the count column.
+FROM
+    uber_cleaned_data       -- Specifies the table to query.
+GROUP BY
+    Timeslot          -- Groups the rows by unique values in the 'Timeslot' column.
+ORDER BY
+    total_requests DESC; -- Orders the results in descending order by the total number of requests for each timeslot.
+    
+    
+    SELECT
+    `Driver id`,      -- Selects the 'Driver id' column.
+    COUNT(*) AS trips_completed -- Counts the number of completed trips for each driver and renames the count column.
+FROM
+    uber_cleaned_data        -- Specifies the table to query.
+WHERE
+    Status = 'Trip Completed' -- Filters the rows to include only those where the 'Status' is 'Trip Completed'.
+GROUP BY
+    `Driver id`       -- Groups the filtered rows by unique 'Driver id' values.
+ORDER BY
+    trips_completed DESC -- Orders the results in descending order by the number of completed trips.
+LIMIT 10;             -- Limits the output to only the top 10 drivers with the most completed trips.
+
+
+SELECT
+    Date,             -- Selects the 'Date' column.
+    COUNT(*) AS requests_count -- Counts the number of requests for each date and renames the count column.
+FROM
+    uber_cleaned_data        -- Specifies the table to query.
+GROUP BY
+    Date              -- Groups the rows by unique values in the 'Date' column.
+ORDER BY
+    Date ASC;         -- Orders the results in ascending order by date, showing the earliest dates first.
